@@ -17,15 +17,6 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const LightBtn = styled.button`
-  margin-left: auto;
-  background-color: ${(props) => props.theme.liColor};
-  padding: 5px 10px;
-  color: ${(props) => props.theme.bgColor};
-  border: none;
-  border-radius: 5px;
-`;
-
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
@@ -76,7 +67,6 @@ interface ICoin {
 const Coins = () => {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
-  const HandleLightBtn = () => {};
   return (
     <Container>
       <Helmet>
@@ -84,7 +74,6 @@ const Coins = () => {
       </Helmet>
       <Header>
         <Title>코인</Title>
-        <LightBtn onClick={HandleLightBtn}>light</LightBtn>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
