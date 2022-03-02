@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "styled-components";
 import { theme, lightTheme } from "./theme";
 import { useState } from "react";
+import Button from "./Button";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -69,17 +70,8 @@ a {
 }
 `;
 
-const LightBtn = styled.button`
-  position: absolute;
-  top: 30px;
+const LightButton = styled(Button)`
   right: 30px;
-  font-size: 16px;
-  padding: 7px 15px;
-  border-radius: 10px;
-  background-color: ${(props) => props.theme.accentColor};
-  color: ${(props) => props.theme.textColor};
-  border: none;
-  text-transform: uppercase;
 `;
 
 const App = () => {
@@ -92,9 +84,9 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={isLight ? lightTheme : theme}>
-        <LightBtn onClick={handleLightMode}>
+        <LightButton onClick={handleLightMode}>
           {isLight ? "Dark" : "Light"}
-        </LightBtn>
+        </LightButton>
         <GlobalStyle />
         <HelmetProvider>
           <Router />

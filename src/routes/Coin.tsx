@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { Helmet } from "react-helmet-async";
+import Button from "../Button";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -78,6 +79,15 @@ const Title = styled.h1`
 
 const Loader = styled.div`
   text-align: center;
+`;
+
+const HomeButton = styled(Button)`
+  left: 30px;
+  padding: 0px;
+  a {
+    padding: 7px 15px;
+    display: block;
+  }
 `;
 
 interface RouteState {
@@ -184,6 +194,9 @@ const Coin = () => {
           {state?.name ? state.name : loading ? "loading..." : infoData?.name}
         </title>
       </Helmet>
+      <HomeButton>
+        <Link to="/">Home</Link>
+      </HomeButton>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "loading..." : infoData?.name}
