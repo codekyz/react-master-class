@@ -74,6 +74,8 @@ const Tab = styled.span<{ isActive: boolean }>`
 
 const Title = styled.h1`
   font-size: 48px;
+  font-weight: 800;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8);
   color: ${(props) => props.theme.accentColor};
 `;
 

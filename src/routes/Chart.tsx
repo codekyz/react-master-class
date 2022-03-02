@@ -37,11 +37,20 @@ const Chart = () => {
         "Loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "price",
-              data: data?.map((price) => price.close),
+              data: data?.map((price) => {
+                return {
+                  x: price.time_close,
+                  y: [
+                    price.open.toFixed(3),
+                    price.high.toFixed(3),
+                    price.low.toFixed(3),
+                    price.close.toFixed(3),
+                  ],
+                };
+              }),
             },
           ]}
           options={{
@@ -49,34 +58,20 @@ const Chart = () => {
               mode: "dark",
             },
             chart: {
-              height: 300,
-              width: 500,
               toolbar: {
                 show: false,
               },
               background: "transparent",
+              height: 350,
             },
-            grid: { show: false },
-            stroke: {
-              curve: "smooth",
-              width: 4,
-            },
-            yaxis: { show: false },
             xaxis: {
               labels: { show: false },
-              axisTicks: { show: false },
-              axisBorder: { show: false },
               type: "datetime",
-              categories: data?.map((price) => price.time_close),
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
-            },
-            colors: ["#0fbcf9"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$ ${value.toFixed(2)}`,
+            yaxis: {
+              show: false,
+              tooltip: {
+                enabled: true,
               },
             },
           }}
