@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -15,6 +14,7 @@ const Header = styled.header`
   height: 10vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const CoinsList = styled.ul``;

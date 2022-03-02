@@ -1,7 +1,10 @@
 import Router from "./routes/Router";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HelmetProvider } from "react-helmet-async";
+import { ThemeProvider } from "styled-components";
+import { theme, lightTheme } from "./theme";
+import { useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -66,16 +69,40 @@ a {
 }
 `;
 
-function App() {
+const LightBtn = styled.button`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 16px;
+  padding: 7px 15px;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.textColor};
+  border: none;
+  text-transform: uppercase;
+`;
+
+const App = () => {
+  const [isLight, setIsLight] = useState(false);
+
+  const handleLightMode = () => {
+    setIsLight(!isLight);
+  };
+
   return (
     <>
-      <GlobalStyle />
-      <HelmetProvider>
-        <Router />
-      </HelmetProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isLight ? lightTheme : theme}>
+        <LightBtn onClick={handleLightMode}>
+          {isLight ? "Dark" : "Light"}
+        </LightBtn>
+        <GlobalStyle />
+        <HelmetProvider>
+          <Router />
+        </HelmetProvider>
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
-}
+};
 
 export default App;
