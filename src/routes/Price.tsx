@@ -4,6 +4,8 @@ import { fetchCoinTickers } from "../api";
 import ApexChart from "react-apexcharts";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { isLightAtom } from "../atoms";
 
 const NowPrice = styled.div`
   font-weight: 800;
@@ -55,6 +57,7 @@ interface TickersData {
 }
 
 const Price = () => {
+  const isLight = useRecoilValue(isLightAtom);
   const { coinId } = useOutletContext<IChartProps>();
   const { isLoading, data } = useQuery<TickersData>(
     ["price", coinId],
@@ -90,14 +93,14 @@ const Price = () => {
             ]}
             options={{
               theme: {
-                mode: "dark",
+                mode: isLight ? "light" : "dark",
               },
               chart: {
                 toolbar: {
                   show: false,
                 },
+                background: "transparent",
                 height: 300,
-                background: "rgba(0, 0, 0, 0.5)",
               },
               plotOptions: {
                 bar: {

@@ -154,13 +154,8 @@ interface TickersData {
 }
 
 const Coin = () => {
-  // const [loading, setLoading] = useState(true);
-  // const [info, setInfo] = useState<InfoData>();
-  // const [priceInfo, setPriceInfo] = useState<PriceData>();
   const { coinId } = useParams();
-  // 6ver 이상부터는 자동으로 string|undefind
   const { state } = useLocation() as RouteState;
-  // 6ver 이상부터는 제네릭을 지원하지 않음
   const priceMatch = useMatch("/:coinDi/price");
   const chartMatch = useMatch("/:coinDi/chart");
 

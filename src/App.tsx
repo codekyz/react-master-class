@@ -6,6 +6,8 @@ import { ThemeProvider } from "styled-components";
 import { theme, lightTheme } from "./theme";
 import { useState } from "react";
 import Button from "./Button";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isLightAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -75,10 +77,11 @@ const LightButton = styled(Button)`
 `;
 
 const App = () => {
-  const [isLight, setIsLight] = useState(false);
+  const isLight = useRecoilValue(isLightAtom);
+  const setLightAtom = useSetRecoilState(isLightAtom);
 
   const handleLightMode = () => {
-    setIsLight(!isLight);
+    setLightAtom((prev) => !prev);
   };
 
   return (

@@ -3,6 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
 import { Helmet } from "react-helmet-async";
+import { useRecoilValue } from "recoil";
+import { isLightAtom } from "../atoms";
 
 interface IChartProps {
   coinId: string;
@@ -20,6 +22,7 @@ interface IHistorical {
 }
 
 const Chart = () => {
+  const isLight = useRecoilValue(isLightAtom);
   const { coinId } = useOutletContext<IChartProps>();
   const { isLoading, data } = useQuery<IHistorical[]>(
     ["ohlcv", coinId],
@@ -55,7 +58,7 @@ const Chart = () => {
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: isLight ? "light" : "dark",
             },
             chart: {
               toolbar: {
